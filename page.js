@@ -3,6 +3,7 @@ import { fetchApi } from "./fetchApi.js";
 export const pagination = (value, next, prev, box) => {
   let temp = parseInt(value.innerHTML);
   var new_Array = [];
+  //   if (temp === 1) return;
   next.addEventListener("click", () => {
     if (temp < 2) {
       temp = temp + 1;
