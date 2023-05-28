@@ -102,84 +102,20 @@ searching_module(button, input, inner_box);
 // Page change
 
 const page = document.querySelector("#current_page");
-let temp = parseInt(page.innerHTML);
+console.log(page.innerHTML);
+
 const next = document.querySelector("#next_page");
 const prev = document.querySelector("#back_page");
 import { pagination } from "./page.js";
-pagination(page, next, prev, inner_box);
-
-const button_ok = document.querySelector("#button_ok");
-
+pagination(page, next, prev, inner_box, 0);
 document.getElementById("button_ok").addEventListener("click", function () {
   var selectedValue = document.querySelector("select").value;
-  console.log("selected value: " + selectedValue);
   switch (selectedValue) {
     case "1":
-      fetchApi("http://localhost:3000/products?_sort=price&_order=asc").then(
-        (result) => {
-          const newArr = result.map(function (value, index) {
-            return `
-                  <div class="col-xl-2 class="item_num_${index}">
-                      <div class="hover_item">
-                          <span class="left-top"> </span>
-                          <span class="right-top"> </span>
-                          <span class="left-bottom"> </span>
-                          <span class="right-botom"> </span>
-                          <div class="inner-box">
-                              <div class="inner-img">
-                                  <img src="${value.thumbnail}">
-                                  <div class="inner-sale">-${value.discountPercentage}%</div>
-                              </div>
-                              <div class="inner-name">${value.title}</div>
-                              <div class="catagory">
-                                      <div class=inner-price>$ ${value.price}</div>
-                                      <div class=inner-stock> Stock : ${value.stock}</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-          
-          `;
-          });
-          inner_box.innerHTML = newArr.join("");
-        }
-      );
-
-      break;
-    case "2":
-      fetchApi("http://localhost:3000/products?_sort=price&_order=desc").then(
-        (result) => {
-          const newArr = result.map(function (value, index) {
-            return `
-                  <div class="col-xl-2 class="item_num_${index}">
-                      <div class="hover_item">
-                          <span class="left-top"> </span>
-                          <span class="right-top"> </span>
-                          <span class="left-bottom"> </span>
-                          <span class="right-botom"> </span>
-                          <div class="inner-box">
-                              <div class="inner-img">
-                                  <img src="${value.thumbnail}">
-                                  <div class="inner-sale">-${value.discountPercentage}%</div>
-                              </div>
-                              <div class="inner-name">${value.title}</div>
-                              <div class="catagory">
-                                      <div class=inner-price>$ ${value.price}</div>
-                                      <div class=inner-stock> Stock : ${value.stock}</div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-          
-          `;
-          });
-          inner_box.innerHTML = newArr.join("");
-        }
-      );
-      break;
-    case "3":
       fetchApi(
-        "http://localhost:3000/products?_sort=discountPercentage&_order=desc"
+        `http://localhost:3000/products?_page=${parseInt(
+          page.innerHTML
+        )}&_limit=18&_sort=price&_order=asc`
       ).then((result) => {
         const newArr = result.map(function (value, index) {
           return `
@@ -206,6 +142,76 @@ document.getElementById("button_ok").addEventListener("click", function () {
           `;
         });
         inner_box.innerHTML = newArr.join("");
+        pagination(page, next, prev, inner_box, 1);
+      });
+
+      break;
+    case "2":
+      fetchApi(
+        `http://localhost:3000/products?_page=${parseInt(
+          page.innerHTML
+        )}&_limit=18&_sort=price&_order=desc`
+      ).then((result) => {
+        const newArr = result.map(function (value, index) {
+          return `
+                  <div class="col-xl-2 class="item_num_${index}">
+                      <div class="hover_item">
+                          <span class="left-top"> </span>
+                          <span class="right-top"> </span>
+                          <span class="left-bottom"> </span>
+                          <span class="right-botom"> </span>
+                          <div class="inner-box">
+                              <div class="inner-img">
+                                  <img src="${value.thumbnail}">
+                                  <div class="inner-sale">-${value.discountPercentage}%</div>
+                              </div>
+                              <div class="inner-name">${value.title}</div>
+                              <div class="catagory">
+                                      <div class=inner-price>$ ${value.price}</div>
+                                      <div class=inner-stock> Stock : ${value.stock}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+          
+          `;
+        });
+        inner_box.innerHTML = newArr.join("");
+        pagination(page, next, prev, inner_box, 2);
+      });
+      break;
+    case "3":
+      fetchApi(
+        `http://localhost:3000/products?_page=${parseInt(
+          page.innerHTML
+        )}&_limit=18&_sort=discountPercentage&_order=desc`
+      ).then((result) => {
+        const newArr = result.map(function (value, index) {
+          return `
+                  <div class="col-xl-2 class="item_num_${index}">
+                      <div class="hover_item">
+                          <span class="left-top"> </span>
+                          <span class="right-top"> </span>
+                          <span class="left-bottom"> </span>
+                          <span class="right-botom"> </span>
+                          <div class="inner-box">
+                              <div class="inner-img">
+                                  <img src="${value.thumbnail}">
+                                  <div class="inner-sale">-${value.discountPercentage}%</div>
+                              </div>
+                              <div class="inner-name">${value.title}</div>
+                              <div class="catagory">
+                                      <div class=inner-price>$ ${value.price}</div>
+                                      <div class=inner-stock> Stock : ${value.stock}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+          
+          `;
+        });
+        inner_box.innerHTML = newArr.join("");
+        pagination(page, next, prev, inner_box, 3);
       });
 
       break;

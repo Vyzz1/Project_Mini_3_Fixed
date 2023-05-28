@@ -1,18 +1,28 @@
 import { fetchApi } from "./fetchApi.js";
-
-export const pagination = (value, next, prev, box) => {
-  let temp = parseInt(value.innerHTML);
+var str = "";
+export const pagination = (page, next, prev, box, option) => {
+  let temp = parseInt(page.innerHTML);
   var new_Array = [];
-  //   if (temp === 1) return;
   next.addEventListener("click", () => {
     if (temp < 2) {
       temp = temp + 1;
-      value.innerHTML = temp;
+      page.innerHTML = temp;
     }
-    fetchApi(`http://localhost:3000/products?_page=${temp}&_limit=18`).then(
-      (result) => {
-        new_Array = result.map((value, index) => {
-          return `
+    console.log(temp);
+    if (option === 0)
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18`;
+    if (option === 1) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=price&_order=asc`;
+    }
+    if (option === 2) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=price&_order=desc`;
+    }
+    if (option === 3) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=discountPercentage&_order=asc`;
+    }
+    fetchApi(str).then((result) => {
+      new_Array = result.map((value, index) => {
+        return `
             <div class="col-xl-2 class="item_num_${index}">
                 <div class="hover_item">
                     <span class="left-top"> </span>
@@ -34,20 +44,30 @@ export const pagination = (value, next, prev, box) => {
             </div>
     
     `;
-        });
-        box.innerHTML = new_Array.join("");
-      }
-    );
+      });
+      box.innerHTML = new_Array.join("");
+    });
   });
   prev.addEventListener("click", () => {
     if (temp > 1) {
       temp = temp - 1;
-      value.innerHTML = temp;
+      page.innerHTML = temp;
     }
-    fetchApi(`http://localhost:3000/products?_page=${temp}&_limit=18`).then(
-      (result) => {
-        new_Array = result.map((value, index) => {
-          return `
+    console.log(temp);
+    if (option === 0)
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18`;
+    if (option === 1) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=price&_order=asc`;
+    }
+    if (option === 2) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=price&_order=desc`;
+    }
+    if (option === 3) {
+      str = `http://localhost:3000/products?_page=${temp}&_limit=18&_sort=discountPercentage&_order=desc`;
+    }
+    fetchApi(str).then((result) => {
+      new_Array = result.map((value, index) => {
+        return `
               <div class="col-xl-2 class="item_num_${index}">
                   <div class="hover_item">
                       <span class="left-top"> </span>
@@ -69,9 +89,8 @@ export const pagination = (value, next, prev, box) => {
               </div>
       
       `;
-        });
-        box.innerHTML = new_Array.join("");
-      }
-    );
+      });
+      box.innerHTML = new_Array.join("");
+    });
   });
 };
