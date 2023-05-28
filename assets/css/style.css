@@ -136,7 +136,9 @@
 
 
 }
-
+.products .inner-box {
+    cursor: pointer;
+}
 .products .inner-box  .inner-price{
     font-weight: 500;
     color: gold;
@@ -232,4 +234,85 @@
     font-size: 20px;
     color: #00ffd5;
     font-family: 'Kanit', sans-serif;
+}
+
+  .category{
+    padding: 80px 0;
+     
+  }
+  .category .inner-box {
+    background: #4CC782;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 15px;
+    padding: 10px ;
+    font-size:15px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+  }
+  .category .inner-box::before{
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+  }
+  .category .inner-box:active{
+    color: #4CC782;
+  }
+  .category .inner-box:active::after{
+    background: transparent;
+  }
+  .category .inner-box:hover::before{
+    opacity: 1;
+  }
+  .category .inner-box::after{
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #4CC782;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  .page .icon-div{
+    padding: 5px ;
+    background: #002bff;
+    width: 3%;
+    text-align: center;
+    border-radius: 10px;
+    
+  }
+  .page .icon-div i{
+    color: #472828;
+  }
+.page span{
+    width: auto;
+    font-weight: 500;
+    color: #080707;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+.page .page-container{
+    display: flex;
+    justify-content: flex-end;
 }
