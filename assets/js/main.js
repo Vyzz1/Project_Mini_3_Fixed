@@ -1,0 +1,10 @@
+import { drawProducts } from "./drawProducts.js";
+import { drawC } from "./drawCategory.js";
+import { search } from "./Searching.js";
+import { sorting } from "./sorting.js";
+import { pagination } from "./pagiantion.js";
+drawC();
+drawProducts();
+search();
+sorting();
+pagination();
