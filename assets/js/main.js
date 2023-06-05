@@ -1,6 +1,6 @@
 import { drawProducts } from "./drawProducts.js";
 import { drawC } from "./drawCategory.js";
-import { search } from "./Searching.js";
+import { search } from "./searching.js";
 import { sorting } from "./sorting.js";
 import { pagination } from "./pagiantion.js";
 drawC();

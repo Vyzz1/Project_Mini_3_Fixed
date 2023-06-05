@@ -30,11 +30,6 @@ export const drawProducts = () => {
     });
 
     products_main.innerHTML = newArr.join("");
-    if (result.length < params.limit) {
-      // buton_next.classList.add("remove");
-      params.isNextPage = false;
-    } else {
-      params.isNextPage = true;
-    }
+    params.isNextPage = result.length < params.limit ? false : true;
   });
 };
